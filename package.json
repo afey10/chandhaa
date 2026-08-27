@@ -1,12 +1,29 @@
 {
-  "name": "veymandoo-dhaftharu",
+  "name": "veymandoo-dhaftharu-client",
   "version": "1.0.0",
   "private": true,
-  "description": "Tha. Veymandoo Police Station - Vehicles & Vessels Dhaftharu (static frontend + Supabase backend)",
+  "type": "module",
   "scripts": {
-    "install:all": "npm install --prefix client",
-    "dev": "npm run dev --prefix client",
-    "build": "npm run build --prefix client",
-    "preview": "npm run preview --prefix client"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.4",
+    "date-fns": "^3.6.0",
+    "lucide-react": "^0.400.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.24.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.39",
+    "tailwindcss": "^3.4.4",
+    "typescript": "^5.5.3",
+    "vite": "^5.3.1"
   }
 }
