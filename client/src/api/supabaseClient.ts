@@ -1,19 +1,11 @@
 import { createClient } from "@supabase/supabase-js";
 
-const url = import.meta.env.VITE_SUPABASE_URL;
-const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const FALLBACK_URL = "https://ntjpcyojyzekicimfpdk.supabase.co";
+const FALLBACK_ANON_KEY = "sb_publishable_BH_jlzOsTQ68HI3oS61FXQ_YZZmW_zk";
 
-if (!url || !anonKey) {
-  throw new Error(
-    "Missing VITE_SUPABASE_URL or VITE_SUPABASE_ANON_KEY. Copy client/.env.example to client/.env.local " +
-      "(values are already filled in for the Veymandoo Police project) before running the app."
-  );
-}
+const url = import.meta.env.VITE_SUPABASE_URL || FALLBACK_URL;
+const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || FALLBACK_ANON_KEY;
 
-// This is the publishable/anon key: safe to ship in the built frontend.
-// Every table has RLS enabled with no policies, so this key alone grants
-// zero direct table access. All reads/writes go through the RPC functions
-// in api/rpc.ts, each of which validates the session token server-side.
 export const supabase = createClient(url, anonKey, {
   auth: { persistSession: false, autoRefreshToken: false },
 });
