@@ -114,13 +114,24 @@ base: command === "build" ? "/your-repo-name/" : "/",
 
 ---
 
-## 6. Mobile Responsiveness
+## 6. Mobile Responsiveness & PWA
 
 - Sidebar collapses to a slide-in drawer below `lg`.
 - Vehicle/Vessel list and dashboard tables switch to a stacked card layout below `sm`; the same
   data, touch-friendly.
 - Settings' user table does the same.
 - Forms are single-column on mobile, two-column from `sm` up.
+- **Installable as a PWA**: has a web app manifest, generated icons (including maskable variants
+  for Android's adaptive icon shape), and a service worker that precaches the app shell (JS/CSS/
+  HTML/icons) for fast repeat loads. On Android/desktop Chrome, a small "Install Dhaftharu" prompt
+  appears automatically when the browser judges it installable; on iOS Safari, use Share → Add to
+  Home Screen (Apple doesn't expose the `beforeinstallprompt` event, so there's no in-app button
+  there — this is an iOS platform limitation, not something the app can work around).
+- **Important**: Supabase requests are explicitly excluded from the service worker's cache
+  (`NetworkOnly` for `*.supabase.co`) — this app always needs live data, and a stale cached vehicle
+  or vessel record would be actively wrong in a police registry. Only static app files are
+  precached; the app itself won't function meaningfully offline (you'll see the shell, not data),
+  which is the correct tradeoff here.
 
 ---
 

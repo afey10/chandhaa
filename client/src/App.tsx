@@ -7,6 +7,7 @@ import ProfilePage from "./pages/ProfilePage";
 import AuditLogPage from "./pages/AuditLogPage";
 import SettingsPage from "./pages/SettingsPage";
 import CategoryManagerPage from "./pages/CategoryManagerPage";
+import InstallPrompt from "./components/InstallPrompt";
 
 import VehicleDashboardPage from "./pages/vehicles/VehicleDashboardPage";
 import VehicleListPage from "./pages/vehicles/VehicleListPage";
@@ -20,34 +21,37 @@ import VesselDetailsPage from "./pages/vessels/VesselDetailsPage";
 
 export default function App() {
   return (
-    <Routes>
-      <Route path="/login" element={<LoginPage />} />
+    <>
+        <Routes>
+        <Route path="/login" element={<LoginPage />} />
 
-      <Route path="/dashboard" element={<ProtectedRoute><MainDashboardPage /></ProtectedRoute>} />
+        <Route path="/dashboard" element={<ProtectedRoute><MainDashboardPage /></ProtectedRoute>} />
 
-      {/* Vehicles */}
-      <Route path="/vehicles" element={<ProtectedRoute><VehicleDashboardPage /></ProtectedRoute>} />
-      <Route path="/vehicles/list" element={<ProtectedRoute><VehicleListPage /></ProtectedRoute>} />
-      <Route path="/vehicles/new" element={<ProtectedRoute><VehicleFormPage /></ProtectedRoute>} />
-      <Route path="/vehicles/categories" element={<ProtectedRoute><CategoryManagerPage title="Vehicle Categories" description="Manage the categories used to classify registered vehicles." kind="vehicle" /></ProtectedRoute>} />
-      <Route path="/vehicles/:id" element={<ProtectedRoute><VehicleDetailsPage /></ProtectedRoute>} />
-      <Route path="/vehicles/:id/edit" element={<ProtectedRoute><VehicleFormPage /></ProtectedRoute>} />
+        {/* Vehicles */}
+        <Route path="/vehicles" element={<ProtectedRoute><VehicleDashboardPage /></ProtectedRoute>} />
+        <Route path="/vehicles/list" element={<ProtectedRoute><VehicleListPage /></ProtectedRoute>} />
+        <Route path="/vehicles/new" element={<ProtectedRoute><VehicleFormPage /></ProtectedRoute>} />
+        <Route path="/vehicles/categories" element={<ProtectedRoute><CategoryManagerPage title="Vehicle Categories" description="Manage the categories used to classify registered vehicles." kind="vehicle" /></ProtectedRoute>} />
+        <Route path="/vehicles/:id" element={<ProtectedRoute><VehicleDetailsPage /></ProtectedRoute>} />
+        <Route path="/vehicles/:id/edit" element={<ProtectedRoute><VehicleFormPage /></ProtectedRoute>} />
 
-      {/* Vessels */}
-      <Route path="/vessels" element={<ProtectedRoute><VesselDashboardPage /></ProtectedRoute>} />
-      <Route path="/vessels/list" element={<ProtectedRoute><VesselListPage /></ProtectedRoute>} />
-      <Route path="/vessels/new" element={<ProtectedRoute><VesselFormPage /></ProtectedRoute>} />
-      <Route path="/vessels/categories" element={<ProtectedRoute><CategoryManagerPage title="Vessel Categories" description="Manage the categories used to classify registered vessels." kind="vessel" /></ProtectedRoute>} />
-      <Route path="/vessels/:id" element={<ProtectedRoute><VesselDetailsPage /></ProtectedRoute>} />
-      <Route path="/vessels/:id/edit" element={<ProtectedRoute><VesselFormPage /></ProtectedRoute>} />
+        {/* Vessels */}
+        <Route path="/vessels" element={<ProtectedRoute><VesselDashboardPage /></ProtectedRoute>} />
+        <Route path="/vessels/list" element={<ProtectedRoute><VesselListPage /></ProtectedRoute>} />
+        <Route path="/vessels/new" element={<ProtectedRoute><VesselFormPage /></ProtectedRoute>} />
+        <Route path="/vessels/categories" element={<ProtectedRoute><CategoryManagerPage title="Vessel Categories" description="Manage the categories used to classify registered vessels." kind="vessel" /></ProtectedRoute>} />
+        <Route path="/vessels/:id" element={<ProtectedRoute><VesselDetailsPage /></ProtectedRoute>} />
+        <Route path="/vessels/:id/edit" element={<ProtectedRoute><VesselFormPage /></ProtectedRoute>} />
 
-      {/* Account */}
-      <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
-      <Route path="/audit-log" element={<ProtectedRoute adminOnly><AuditLogPage /></ProtectedRoute>} />
-      <Route path="/settings" element={<ProtectedRoute adminOnly><SettingsPage /></ProtectedRoute>} />
+        {/* Account */}
+        <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+        <Route path="/audit-log" element={<ProtectedRoute adminOnly><AuditLogPage /></ProtectedRoute>} />
+        <Route path="/settings" element={<ProtectedRoute adminOnly><SettingsPage /></ProtectedRoute>} />
 
-      <Route path="/" element={<Navigate to="/dashboard" replace />} />
-      <Route path="*" element={<Navigate to="/dashboard" replace />} />
-    </Routes>
+        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        <Route path="*" element={<Navigate to="/dashboard" replace />} />
+      </Routes>
+      <InstallPrompt />
+    </>
   );
 }
