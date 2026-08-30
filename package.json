@@ -1,0 +1,12 @@
+{
+  "name": "veymandoo-dhaftharu",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Tha. Veymandoo Police Station - Vehicles & Vessels Dhaftharu (static frontend + Supabase backend)",
+  "scripts": {
+    "install:all": "npm install --prefix client",
+    "dev": "npm run dev --prefix client",
+    "build": "npm run build --prefix client",
+    "preview": "npm run preview --prefix client"
+  }
+}
