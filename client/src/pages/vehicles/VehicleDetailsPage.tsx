@@ -4,6 +4,7 @@ import { ArrowLeft, Pencil, Trash2, FileText } from "lucide-react";
 import AppLayout from "../../layouts/AppLayout";
 import StatusBadge from "../../components/StatusBadge";
 import ConfirmDialog from "../../components/ConfirmDialog";
+import ReminderButton from "../../components/ReminderButton";
 import * as rpc from "../../api/rpc";
 import { getErrorMessage, publicFileUrl } from "../../api/rpc";
 import { daysRemaining, formatDate } from "../../utils/date";
@@ -72,7 +73,8 @@ export default function VehicleDetailsPage() {
           <div className="font-mono-reg text-2xl font-semibold text-navy-950">{vehicle.registrationNumber}</div>
           <div className="mt-1 text-sm text-gray-500">{vehicle.categoryName} · {vehicle.make} {vehicle.model} {vehicle.year ? `(${vehicle.year})` : ""}</div>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
+          <ReminderButton type="vehicle" registrationNumber={vehicle.registrationNumber} contactNumber={vehicle.contactNumber} status={vehicle.status} />
           {canEdit && (
             <Link to={`/vehicles/${id}/edit`} className="flex items-center gap-1.5 rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
               <Pencil size={15} /> Edit Vehicle

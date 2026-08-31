@@ -4,6 +4,7 @@ import { Anchor, Wallet, ShieldAlert, Wrench, ChevronRight } from "lucide-react"
 import AppLayout from "../../layouts/AppLayout";
 import StatCard from "../../components/StatCard";
 import StatusBadge from "../../components/StatusBadge";
+import ReminderButton from "../../components/ReminderButton";
 import * as rpc from "../../api/rpc";
 import { getErrorMessage } from "../../api/rpc";
 import { daysRemaining, formatDate } from "../../utils/date";
@@ -80,12 +81,13 @@ export default function VesselDashboardPage() {
                 <th className="px-4 py-3">Expiry Date</th>
                 <th className="px-4 py-3">Status</th>
                 <th className="px-4 py-3"></th>
+                <th className="px-4 py-3"></th>
               </tr>
             </thead>
             <tbody>
-              {loadingList && <tr><td colSpan={5} className="px-4 py-6 text-center text-gray-400">Loading…</td></tr>}
+              {loadingList && <tr><td colSpan={6} className="px-4 py-6 text-center text-gray-400">Loading…</td></tr>}
               {!loadingList && items.length === 0 && (
-                <tr><td colSpan={5} className="px-4 py-8 text-center text-gray-400">No vessels are currently in this expiry window.</td></tr>
+                <tr><td colSpan={6} className="px-4 py-8 text-center text-gray-400">No vessels are currently in this expiry window.</td></tr>
               )}
               {!loadingList &&
                 items.map((v) => {
@@ -97,6 +99,9 @@ export default function VesselDashboardPage() {
                       <td className="px-4 py-3 text-gray-700">{v.ownerFullName}</td>
                       <td className="px-4 py-3 text-gray-700">{formatDate(expiry)}</td>
                       <td className="px-4 py-3"><StatusBadge status={status} daysRemaining={daysRemaining(expiry)} /></td>
+                      <td className="px-4 py-3">
+                        <ReminderButton type="vessel" registrationNumber={v.registrationNumber} contactNumber={v.contactNumber} status={v.status} compact />
+                      </td>
                       <td className="px-4 py-3 text-right">
                         <Link to={`/vessels/${v.id}`} className="inline-flex items-center gap-1 text-sm font-medium text-navy-700 hover:underline">
                           View <ChevronRight size={14} />
@@ -119,13 +124,14 @@ export default function VesselDashboardPage() {
               const expiry = (v as any)[tabConfig.dateField];
               const status = (v.status as any)[tabConfig.statusField];
               return (
-                <Link key={v.id} to={`/vessels/${v.id}`} className="flex items-center justify-between px-4 py-3">
-                  <div>
+                <div key={v.id} className="flex items-center justify-between gap-2 px-4 py-3">
+                  <Link to={`/vessels/${v.id}`} className="min-w-0 flex-1">
                     <div className="font-mono-reg font-medium text-navy-900">{v.registrationNumber}</div>
                     <div className="text-xs text-gray-500">{v.ownerFullName} · {formatDate(expiry)}</div>
-                  </div>
+                  </Link>
+                  <ReminderButton type="vessel" registrationNumber={v.registrationNumber} contactNumber={v.contactNumber} status={v.status} compact />
                   <StatusBadge status={status} daysRemaining={daysRemaining(expiry)} />
-                </Link>
+                </div>
               );
             })}
         </div>

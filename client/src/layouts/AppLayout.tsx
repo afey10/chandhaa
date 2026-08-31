@@ -50,7 +50,10 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
 
   const sidebar = (
     <div className="flex h-full flex-col bg-navy-950">
-      <div className="flex items-center gap-3 px-4 py-5 border-b border-white/10">
+      <div
+        className="flex items-center gap-3 px-4 py-5 border-b border-white/10"
+        style={{ paddingTop: "calc(1.25rem + env(safe-area-inset-top))" }}
+      >
         <img src="/police-logo.png" alt="Maldives Police Service" className="h-11 w-auto shrink-0" />
         <div className="leading-tight">
           <div className="font-display text-sm font-semibold text-white">Tha. Veymandoo</div>
@@ -115,8 +118,11 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       )}
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="flex h-16 shrink-0 items-center justify-between border-b border-[#e5e8f0] bg-white px-4">
-          <button className="rounded-lg p-2 text-navy-900 hover:bg-gray-100 lg:hidden" onClick={() => setMobileOpen(true)}>
+        <header
+          className="flex h-16 shrink-0 items-center justify-between border-b border-[#e5e8f0] bg-white px-4"
+          style={{ paddingTop: "env(safe-area-inset-top)", height: "calc(4rem + env(safe-area-inset-top))" }}
+        >
+          <button className="rounded-lg p-2 text-navy-900 hover:bg-gray-100 lg:hidden" onClick={() => setMobileOpen(true)} aria-label="Open menu">
             <Menu size={20} />
           </button>
           <div className="hidden font-display text-base font-semibold text-navy-900 lg:block">

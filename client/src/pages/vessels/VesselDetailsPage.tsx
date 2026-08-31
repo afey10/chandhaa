@@ -4,6 +4,7 @@ import { ArrowLeft, Pencil, Trash2, FileText } from "lucide-react";
 import AppLayout from "../../layouts/AppLayout";
 import StatusBadge from "../../components/StatusBadge";
 import ConfirmDialog from "../../components/ConfirmDialog";
+import ReminderButton from "../../components/ReminderButton";
 import * as rpc from "../../api/rpc";
 import { getErrorMessage, publicFileUrl } from "../../api/rpc";
 import { daysRemaining, formatDate } from "../../utils/date";
@@ -72,7 +73,8 @@ export default function VesselDetailsPage() {
           <div className="font-mono-reg text-2xl font-semibold text-navy-950">{vessel.registrationNumber}</div>
           <div className="mt-1 text-sm text-gray-500">{vessel.categoryName} {vessel.vesselName ? `· ${vessel.vesselName}` : ""}</div>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
+          <ReminderButton type="vessel" registrationNumber={vessel.registrationNumber} contactNumber={vessel.contactNumber} status={vessel.status} />
           {canEdit && (
             <Link to={`/vessels/${id}/edit`} className="flex items-center gap-1.5 rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
               <Pencil size={15} /> Edit Vessel
