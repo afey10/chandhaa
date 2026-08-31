@@ -78,7 +78,7 @@ export const changePassword = (currentPassword: string, newPassword: string) =>
 
 /** Uploads a file to the public `uploads` bucket under the given folder and
  * returns the storage path to store on the record (e.g. "uploads/vehicles/xyz.jpg"). */
-export async function uploadFile(file: File, folder: "vehicles" | "vessels" | "profiles" | "documents"): Promise<string> {
+export async function uploadFile(file: File, folder: "vehicles" | "vessels" | "profiles" | "documents" | "foreigners"): Promise<string> {
   const ext = file.name.split(".").pop();
   const path = `${folder}/${crypto.randomUUID()}.${ext}`;
   const { error } = await supabase.storage.from("uploads").upload(path, file, { upsert: false });
@@ -90,6 +90,16 @@ export function publicFileUrl(path: string | null | undefined): string | null {
   if (!path) return null;
   const { data } = supabase.storage.from("uploads").getPublicUrl(path);
   return data.publicUrl;
+}
+
+/** Best-effort deletion of a stored file (e.g. after a record with a photo is deleted). */
+export async function deleteFile(path: string | null | undefined): Promise<void> {
+  if (!path) return;
+  try {
+    await supabase.storage.from("uploads").remove([path]);
+  } catch {
+    // non-fatal — an orphaned file is a minor cleanup issue, not worth failing the delete over
+  }
 }
 
 // ---------------- Vehicles ----------------
@@ -187,3 +197,27 @@ export const listAuditLog = (params: { search?: string; recordType?: string; pag
     p_page: params.page || 1,
     p_page_size: params.pageSize || 50,
   });
+
+// ---------------- Foreigners (Bidheyseenge Dhaftharu) ----------------
+
+export const getForeignerDashboard = (warningDays = 30) => authedCall("get_foreigner_dashboard", { p_warning_days: warningDays });
+export const getForeignersExpiring = (type: "passport" | "visa", warningDays = 30) =>
+  authedCall<{ items: any[] }>("get_foreigners_expiring", { p_type: type, p_warning_days: warningDays });
+export const listForeigners = (params: Record<string, any>) =>
+  authedCall("list_foreigners", {
+    p_search: params.search || "",
+    p_country: params.country || "",
+    p_occupation: params.occupation || "",
+    p_work_place: params.workPlace || "",
+    p_sort_by: params.sortBy || "full_name",
+    p_sort_dir: params.sortDir || "asc",
+    p_page: params.page || 1,
+    p_page_size: params.pageSize || 20,
+  });
+export const getForeignerFilterOptions = () =>
+  authedCall<{ countries: string[]; occupations: string[]; workPlaces: string[] }>("get_foreigner_filter_options");
+export const getForeigner = (id: string) => authedCall<{ foreigner: any }>("get_foreigner", { p_id: id });
+export const createForeigner = (data: Record<string, any>) => authedCall<{ id: string; message: string }>("create_foreigner", { p_data: data });
+export const updateForeigner = (id: string, data: Record<string, any>) =>
+  authedCall<{ message: string }>("update_foreigner", { p_id: id, p_data: data });
+export const deleteForeigner = (id: string) => authedCall<{ message: string; photoUrl: string | null }>("delete_foreigner", { p_id: id });

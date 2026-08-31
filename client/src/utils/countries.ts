@@ -1,0 +1,28 @@
+// A practical list of countries commonly seen in Maldives work-permit records.
+// Not the full ISO list — trimmed to what's actually useful here, but easy to extend.
+export const COUNTRIES = [
+  "Bangladesh",
+  "India",
+  "Sri Lanka",
+  "Nepal",
+  "Pakistan",
+  "Philippines",
+  "Indonesia",
+  "China",
+  "Thailand",
+  "Myanmar",
+  "Vietnam",
+  "Kenya",
+  "Ethiopia",
+  "Egypt",
+  "Malaysia",
+  "Bhutan",
+  "United Kingdom",
+  "United States",
+  "Australia",
+  "Russia",
+  "Germany",
+  "France",
+  "Italy",
+  "Other",
+].sort((a, b) => (a === "Other" ? 1 : b === "Other" ? -1 : a.localeCompare(b)));

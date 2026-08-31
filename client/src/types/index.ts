@@ -85,3 +85,29 @@ export interface AuditEntry {
   changes?: Record<string, unknown> | null;
   createdAt: string;
 }
+
+export interface ForeignerStatus {
+  passport: ExpiryStatus;
+  visa: ExpiryStatus;
+}
+
+export interface Foreigner {
+  id: string;
+  fullName: string;
+  photoUrl?: string | null;
+  country: string;
+  passportNumber: string;
+  passportExpiryDate: string;
+  workVisaNumber: string;
+  workVisaExpiryDate: string;
+  contactNumber?: string | null;
+  presentAddress?: string | null;
+  workPlace?: string | null;
+  sponsor?: string | null;
+  occupation?: string | null;
+  durationInIsland?: string | null;
+  durationInMaldives?: string | null;
+  status: ForeignerStatus;
+  createdAt: string;
+  updatedAt: string;
+}

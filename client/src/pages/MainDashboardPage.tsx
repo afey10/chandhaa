@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Car, Anchor, ArrowRight } from "lucide-react";
+import { Car, Anchor, Users, ArrowRight } from "lucide-react";
 import AppLayout from "../layouts/AppLayout";
 import { useAuth } from "../context/AuthContext";
 
@@ -10,13 +10,13 @@ export default function MainDashboardPage() {
 
   return (
     <AppLayout>
-      <div className="mx-auto max-w-4xl">
+      <div className="mx-auto max-w-5xl">
         <div className="mb-8">
           <h1 className="font-display text-2xl font-semibold text-navy-950">Welcome, {user?.fullName?.split(" ")[0]}</h1>
           <p className="mt-1 text-sm text-gray-500">Choose a registry to continue.</p>
         </div>
 
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           <button
             onClick={() => navigate("/vehicles")}
             className="card group relative overflow-hidden p-8 text-left transition hover:border-navy-300 hover:shadow-md"
@@ -42,6 +42,20 @@ export default function MainDashboardPage() {
             <p className="mt-1 text-sm text-gray-500">Registry of dhonis, fishing vessels, speedboats and yachts.</p>
             <div className="mt-4 flex items-center gap-1 text-sm font-medium text-navy-700">
               Open Vessel Dashboard <ArrowRight size={15} className="transition group-hover:translate-x-1" />
+            </div>
+          </button>
+
+          <button
+            onClick={() => navigate("/bidheyseenge")}
+            className="card group relative overflow-hidden p-8 text-left transition hover:border-navy-300 hover:shadow-md"
+          >
+            <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-navy-950 text-gold-400">
+              <Users size={26} />
+            </div>
+            <h2 className="mt-5 font-display text-xl font-semibold text-navy-950">Bidheyseenge Dhaftharu</h2>
+            <p className="mt-1 text-sm text-gray-500">Registry of foreigners — passports, work visas and employment details.</p>
+            <div className="mt-4 flex items-center gap-1 text-sm font-medium text-navy-700">
+              Open Bidheyseenge Dashboard <ArrowRight size={15} className="transition group-hover:translate-x-1" />
             </div>
           </button>
         </div>

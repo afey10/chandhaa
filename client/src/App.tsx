@@ -19,6 +19,11 @@ import VesselListPage from "./pages/vessels/VesselListPage";
 import VesselFormPage from "./pages/vessels/VesselFormPage";
 import VesselDetailsPage from "./pages/vessels/VesselDetailsPage";
 
+import ForeignerDashboardPage from "./pages/foreigners/ForeignerDashboardPage";
+import ForeignerListPage from "./pages/foreigners/ForeignerListPage";
+import ForeignerFormPage from "./pages/foreigners/ForeignerFormPage";
+import ForeignerDetailsPage from "./pages/foreigners/ForeignerDetailsPage";
+
 export default function App() {
   return (
     <>
@@ -42,6 +47,14 @@ export default function App() {
         <Route path="/vessels/categories" element={<ProtectedRoute><CategoryManagerPage title="Vessel Categories" description="Manage the categories used to classify registered vessels." kind="vessel" /></ProtectedRoute>} />
         <Route path="/vessels/:id" element={<ProtectedRoute><VesselDetailsPage /></ProtectedRoute>} />
         <Route path="/vessels/:id/edit" element={<ProtectedRoute><VesselFormPage /></ProtectedRoute>} />
+
+        {/* Bidheyseenge Dhaftharu (Foreigners) */}
+        <Route path="/bidheyseenge" element={<ProtectedRoute><ForeignerDashboardPage /></ProtectedRoute>} />
+        <Route path="/bidheyseenge/dashboard" element={<ProtectedRoute><ForeignerDashboardPage /></ProtectedRoute>} />
+        <Route path="/bidheyseenge/foreigners" element={<ProtectedRoute><ForeignerListPage /></ProtectedRoute>} />
+        <Route path="/bidheyseenge/foreigners/add" element={<ProtectedRoute><ForeignerFormPage /></ProtectedRoute>} />
+        <Route path="/bidheyseenge/foreigners/:id" element={<ProtectedRoute><ForeignerDetailsPage /></ProtectedRoute>} />
+        <Route path="/bidheyseenge/foreigners/:id/edit" element={<ProtectedRoute><ForeignerFormPage /></ProtectedRoute>} />
 
         {/* Account */}
         <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />

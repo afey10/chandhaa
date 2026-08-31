@@ -4,6 +4,7 @@ import {
   LayoutDashboard,
   Car,
   Anchor,
+  Users,
   UserCircle,
   LogOut,
   ScrollText,
@@ -82,6 +83,15 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             <NavItem to="/vessels/new" icon={<Anchor size={17} />} label="Add Vessel" />
           )}
           <NavItem to="/vessels/categories" icon={<Anchor size={17} />} label="Vessel Categories" />
+        </div>
+
+        <SectionLabel>Bidheyseenge Dhaftharu</SectionLabel>
+        <div className="space-y-1">
+          <NavItem to="/bidheyseenge" icon={<Users size={17} />} label="Dashboard" end />
+          <NavItem to="/bidheyseenge/foreigners" icon={<Users size={17} />} label="Foreigner List" />
+          {(user?.role === "admin" || user?.canAddRecords) && (
+            <NavItem to="/bidheyseenge/foreigners/add" icon={<Users size={17} />} label="Add Foreigner" />
+          )}
         </div>
 
         <SectionLabel>Account</SectionLabel>
