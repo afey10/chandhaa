@@ -1,4 +1,4 @@
-export type ExpiryStatus = "expired" | "critical" | "expiring_soon" | "valid";
+export type ExpiryStatus = "expired" | "critical" | "expiring_soon" | "valid" | "not_set";
 
 export interface AuthUser {
   id: string;
@@ -97,9 +97,9 @@ export interface Foreigner {
   photoUrl?: string | null;
   country: string;
   passportNumber: string;
-  passportExpiryDate: string;
+  passportExpiryDate?: string | null;
   workVisaNumber: string;
-  workVisaExpiryDate: string;
+  workVisaExpiryDate?: string | null;
   contactNumber?: string | null;
   presentAddress?: string | null;
   workPlace?: string | null;

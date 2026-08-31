@@ -1,4 +1,5 @@
-export function daysRemaining(expiryDate: string): number {
+export function daysRemaining(expiryDate: string | null | undefined): number | undefined {
+  if (!expiryDate) return undefined;
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const expiry = new Date(expiryDate);
@@ -6,7 +7,7 @@ export function daysRemaining(expiryDate: string): number {
   return Math.round((expiry.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
 }
 
-export function formatDate(dateStr: string): string {
+export function formatDate(dateStr: string | null | undefined): string {
   if (!dateStr) return "—";
   const d = new Date(dateStr);
   return d.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });

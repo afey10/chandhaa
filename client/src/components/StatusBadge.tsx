@@ -6,6 +6,7 @@ const CONFIG: Record<ExpiryStatus, { label: string; color: string; bg: string }>
   expiring_soon: { label: "Expiring Soon", color: "#92610A", bg: "#FFFAEB" },
   critical: { label: "Critical", color: "#B54708", bg: "#FFF6ED" },
   expired: { label: "Expired", color: "#B42318", bg: "#FEF3F2" },
+  not_set: { label: "Not Set", color: "#667085", bg: "#F2F4F7" },
 };
 
 export default function StatusBadge({ status, daysRemaining }: { status: ExpiryStatus; daysRemaining?: number }) {

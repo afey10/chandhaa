@@ -52,8 +52,8 @@ export default function ForeignerFormPage() {
       .then((res) => {
         const f = res.foreigner;
         setForm({
-          fullName: f.fullName, country: f.country, passportNumber: f.passportNumber, passportExpiryDate: f.passportExpiryDate,
-          workVisaNumber: f.workVisaNumber, workVisaExpiryDate: f.workVisaExpiryDate, contactNumber: f.contactNumber || "",
+          fullName: f.fullName, country: f.country, passportNumber: f.passportNumber, passportExpiryDate: f.passportExpiryDate || "",
+          workVisaNumber: f.workVisaNumber, workVisaExpiryDate: f.workVisaExpiryDate || "", contactNumber: f.contactNumber || "",
           presentAddress: f.presentAddress || "", workPlace: f.workPlace || "", sponsor: f.sponsor || "",
           occupation: f.occupation || "", durationInIsland: f.durationInIsland || "", durationInMaldives: f.durationInMaldives || "",
         });
@@ -85,9 +85,7 @@ export default function ForeignerFormPage() {
     if (!form.fullName.trim()) e.fullName = "Full name is required.";
     if (!form.country) e.country = "Country is required.";
     if (!form.passportNumber.trim()) e.passportNumber = "Passport number is required.";
-    if (!form.passportExpiryDate) e.passportExpiryDate = "Passport expiry date is required.";
     if (!form.workVisaNumber.trim()) e.workVisaNumber = "Work visa number is required.";
-    if (!form.workVisaExpiryDate) e.workVisaExpiryDate = "Work visa expiry date is required.";
     if (!isEdit && !photo) e.photo = "A person photo is required.";
     setErrors((prev) => ({ ...prev, ...e }));
     return Object.keys(e).length === 0;
@@ -172,7 +170,7 @@ export default function ForeignerFormPage() {
                 <input value={form.passportNumber} onChange={(e) => update("passportNumber", e.target.value.toUpperCase())} className={inputClass} />
                 {errors.passportNumber && <p className="mt-1 text-xs text-red-600">{errors.passportNumber}</p>}
               </Field>
-              <Field label="Passport Expiry Date" required>
+              <Field label="Passport Expiry Date">
                 <input type="date" value={form.passportExpiryDate} onChange={(e) => update("passportExpiryDate", e.target.value)} className={inputClass} />
                 {errors.passportExpiryDate && <p className="mt-1 text-xs text-red-600">{errors.passportExpiryDate}</p>}
               </Field>
@@ -186,7 +184,7 @@ export default function ForeignerFormPage() {
                 <input value={form.workVisaNumber} onChange={(e) => update("workVisaNumber", e.target.value.toUpperCase())} className={inputClass} />
                 {errors.workVisaNumber && <p className="mt-1 text-xs text-red-600">{errors.workVisaNumber}</p>}
               </Field>
-              <Field label="Work Visa Expiry Date" required>
+              <Field label="Work Visa Expiry Date">
                 <input type="date" value={form.workVisaExpiryDate} onChange={(e) => update("workVisaExpiryDate", e.target.value)} className={inputClass} />
                 {errors.workVisaExpiryDate && <p className="mt-1 text-xs text-red-600">{errors.workVisaExpiryDate}</p>}
               </Field>
