@@ -12,6 +12,7 @@ import {
   ChevronDown,
   LayoutGrid,
   X,
+  type LucideIcon,
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { publicFileUrl } from "../api/rpc";
@@ -26,7 +27,7 @@ interface ModuleItem {
 interface ModuleDef {
   key: string;
   label: string;
-  icon: React.ComponentType<{ size?: number }>;
+  icon: LucideIcon;
   dashboard: string;
   items: ModuleItem[];
 }
